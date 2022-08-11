@@ -410,6 +410,7 @@ module Embulk
             dataset ||= @dataset
             options ||= {}
             options['time_partitioning'] ||= @task['time_partitioning']
+            options['range_partitioning'] ||= @task['range_partitioning']
             if Helper.has_partition_decorator?(table)
               options['time_partitioning'] ||= {'type' => 'DAY'}
               table = Helper.chomp_partition_decorator(table)
@@ -430,6 +431,17 @@ module Embulk
                 type: options['time_partitioning']['type'],
                 expiration_ms: options['time_partitioning']['expiration_ms'],
                 field: options['time_partitioning']['field'],
+              }
+            end
+
+            if options['range_partitioning']
+              body[:range_partitioning] = {
+                field: options['range_partitioning']['field'],
+              }
+              body[:range_partitioning][:range] = {
+                start: options['range_partitioning']['range']['start'],
+                end: options['range_partitioning']['range']['end'],
+                interval: options['range_partitioning']['range']['interval'],
               }
             end
 

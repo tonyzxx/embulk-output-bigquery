@@ -87,6 +87,7 @@ module Embulk
           'ignore_unknown_values'          => config.param('ignore_unknown_values',          :bool,    :default => false),
           'allow_quoted_newlines'          => config.param('allow_quoted_newlines',          :bool,    :default => false),
           'time_partitioning'              => config.param('time_partitioning',              :hash,    :default => nil),
+          'range_partitioning'              => config.param('range_partitioning',            :hash,    :default => nil),
           'clustering'                     => config.param('clustering',                     :hash,    :default => nil), # google-api-ruby-client >= v0.21.0
           'schema_update_options'          => config.param('schema_update_options',          :array,   :default => nil),
 
